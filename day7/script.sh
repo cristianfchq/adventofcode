@@ -24,18 +24,31 @@ do
   echo "$line"
   numCaracteres=$(echo $line | wc -m)
   
-  line=$(echo ${line//:/':"'})
-  line=$(echo ${line//' '/'", '})
+  
+  line=$(echo ${line//', '/'", "'})
+  line=$(echo ${line//' contain '/'", "'})
+  line=$(echo ${line//'.'/'"],'})
+  line=$(echo ${line//'bags'/''})
+  line=$(echo ${line//'bag'/''})
+
+  line=$(echo ${line//'1 '/'1", "'})
+  line=$(echo ${line//'2 '/'2", "'})
+  line=$(echo ${line//'3 '/'3", "'})
+  line=$(echo ${line//'4 '/'4", "'})
+  line=$(echo ${line//'5 '/'5", "'})
+  line=$(echo ${line//'6 '/'6", "'})
+  line=$(echo ${line//'7 '/'7", "'})
+  line=$(echo ${line//'8 '/'8", "'})
+  line=$(echo ${line//'9 '/'9", "'})
+
+  
+  line=$(echo ${line//' "'/'"'})
+  line=$(echo ${line//' "'/'"'})
   
   
-  declare var1=1;
-  if test $numCaracteres -gt $var1;
-  	then
-  		echo $line'",' >> objetoDatos.js
-  	else
-  		echo $line'},
-{' >> objetoDatos.js
-  fi;
+  
+  
+  echo '["'$line >> datos.js
   
   
   
@@ -44,8 +57,8 @@ do
 done < datos.txt
 
 
-sed -i '1i var datos = [{' objetoDatos.js
-echo "}];" >> objetoDatos.js
+sed -i '1i var datos = [' datos.js
+echo "];" >> datos.js
 
 
 
